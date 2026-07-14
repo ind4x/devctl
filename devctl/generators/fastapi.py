@@ -44,19 +44,30 @@ pydantic
         with open(os.path.join(project_path, "requirements.txt"), "w") as f:
             f.write(requirements)
 
+        import sys
+        python_exe = "python" if sys.platform == "win32" else "python3"
+
         # 3. Create virtual environment
         typer.secho("Creating virtual environment...", fg=typer.colors.CYAN)
-        subprocess.run(["python3", "-m", "venv", ".venv"], cwd=project_path, check=True)
+        subprocess.run(
+            [python_exe, "-m", "venv", ".venv"],
+            cwd=project_path,
+            check=True,
+            shell=(sys.platform == "win32"),
+        )
 
         # 4. Install dependencies
         typer.secho("Installing dependencies (fastapi, uvicorn)...", fg=typer.colors.CYAN)
-        # Note: on Linux it's .venv/bin/pip
-        pip_path = os.path.join(".venv", "bin", "pip")
+        if sys.platform == "win32":
+            pip_path = os.path.join(".venv", "Scripts", "pip.exe")
+        else:
+            pip_path = os.path.join(".venv", "bin", "pip")
         subprocess.run(
             [pip_path, "install", "-r", "requirements.txt"],
             cwd=project_path,
             check=True,
             stdout=subprocess.DEVNULL,
+            shell=(sys.platform == "win32"),
         )
 
         typer.secho(f"FastAPI project '{safe_name}' successfully generated!", fg=typer.colors.GREEN)

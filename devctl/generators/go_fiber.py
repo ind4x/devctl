@@ -19,9 +19,16 @@ def generate_go_boilerplate(project_name: str) -> bool:
     try:
         os.makedirs(project_path, exist_ok=True)
 
+        from devctl.utils import get_platform
+        platform = get_platform()
         # 1. Go mod init
         typer.secho("Initializing Go module...", fg=typer.colors.CYAN)
-        subprocess.run(["go", "mod", "init", project_name], cwd=project_path, check=True)
+        subprocess.run(
+            ["go", "mod", "init", project_name],
+            cwd=project_path,
+            check=True,
+            shell=platform.shell_required,
+        )
 
         # 2. Install Fiber
         typer.secho("Installing Fiber framework...", fg=typer.colors.CYAN)
@@ -30,6 +37,7 @@ def generate_go_boilerplate(project_name: str) -> bool:
             cwd=project_path,
             check=True,
             stdout=subprocess.DEVNULL,
+            shell=platform.shell_required,
         )
 
         # 3. Create main.go

@@ -4,10 +4,11 @@
 orchestrate the development lifecycle for modern full-stack architectures. It
 provides a unified workflow for managing backends (Spring Boot, NestJS, Go,
 FastAPI), frontends (Angular, Vue, React, NextJS, Svelte), and their
-containerization.
+containerization across Linux, macOS, and Windows.
 
 ## Core Features
 
+-   **Cross-Platform Architecture**: Out-of-the-box support for Windows, Linux, and macOS utilizing a robust platform abstraction layer.
 -   **Multi-Stack Orchestration**: Launch databases, multiple microservices, and
     frontend dev servers with a single command. Includes real-time, prefixed log
     streaming.

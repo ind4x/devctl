@@ -17,16 +17,24 @@ def generate_react_boilerplate(project_name: str) -> bool:
     safe_name = project_name.lower().replace("_", "-")
 
     try:
+        from devctl.utils import get_platform
+        platform = get_platform()
         typer.secho("Scaffolding React project...", fg=typer.colors.CYAN)
         subprocess.run(
             ["npm", "create", "vite@latest", safe_name, "--", "--template", "react-ts"],
             check=True,
+            shell=platform.shell_required,
         )
 
         project_full_path = os.path.join(os.getcwd(), safe_name)
 
         typer.secho("Installing npm dependencies...", fg=typer.colors.CYAN)
-        subprocess.run(["npm", "install"], cwd=project_full_path, check=True)
+        subprocess.run(
+            ["npm", "install"],
+            cwd=project_full_path,
+            check=True,
+            shell=platform.shell_required,
+        )
 
         typer.secho(
             f"ReactJS frontend '{safe_name}' successfully generated!", fg=typer.colors.GREEN

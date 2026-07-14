@@ -79,8 +79,15 @@ def generate_angular_boilerplate(project_name: str) -> bool:
 
     safe_name = project_name.lower().replace("_", "-")
 
+    from devctl.utils import get_platform
+    platform = get_platform()
     try:
-        subprocess.run(["ng", "version"], capture_output=True, check=True)
+        subprocess.run(
+            ["ng", "version"],
+            capture_output=True,
+            check=True,
+            shell=platform.shell_required,
+        )
     except FileNotFoundError:
         typer.secho(
             "Error: Angular CLI ('ng') not found on your system.",
@@ -95,7 +102,7 @@ def generate_angular_boilerplate(project_name: str) -> bool:
         command = ["ng", "new", safe_name, "--routing=true", "--style=scss", "--skip-git=true"]
 
         typer.secho("Downloading npm packages... (This may take 1-2 minutes)", fg=typer.colors.CYAN)
-        subprocess.run(command, check=True)
+        subprocess.run(command, check=True, shell=platform.shell_required)
 
         # Post-installation configuration
         project_full_path = os.path.join(os.getcwd(), safe_name)

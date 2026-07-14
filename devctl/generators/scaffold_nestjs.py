@@ -25,6 +25,8 @@ def generate_nest_resource(resource_name: str, fields_str: str, root_path: str =
 
     typer.secho(f"⚙️  Generating NestJS resource '{resource_name}'...", fg=typer.colors.CYAN)
 
+    from devctl.utils import get_platform
+    platform = get_platform()
     try:
         # Use npx to run Nest CLI
         # 'g res' is shorthand for 'generate resource'
@@ -33,6 +35,7 @@ def generate_nest_resource(resource_name: str, fields_str: str, root_path: str =
             ["npx", "@nestjs/cli", "g", "resource", resource_lower, "--no-spec"],
             cwd=nest_root,
             check=True,
+            shell=platform.shell_required,
         )
 
         typer.secho(

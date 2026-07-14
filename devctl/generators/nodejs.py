@@ -21,10 +21,16 @@ def generate_nodejs_boilerplate(project_name: str) -> bool:
     try:
         os.makedirs(project_path, exist_ok=True)
 
+        from devctl.utils import get_platform
+        platform = get_platform()
         # 1. Initialize package.json
         typer.secho("Initializing package.json...", fg=typer.colors.CYAN)
         subprocess.run(
-            ["npm", "init", "-y"], cwd=project_path, check=True, stdout=subprocess.DEVNULL
+            ["npm", "init", "-y"],
+            cwd=project_path,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            shell=platform.shell_required,
         )
 
         # 2. Install dependencies
@@ -37,6 +43,7 @@ def generate_nodejs_boilerplate(project_name: str) -> bool:
             cwd=project_path,
             check=True,
             stdout=subprocess.DEVNULL,
+            shell=platform.shell_required,
         )
         subprocess.run(
             [
@@ -53,12 +60,17 @@ def generate_nodejs_boilerplate(project_name: str) -> bool:
             cwd=project_path,
             check=True,
             stdout=subprocess.DEVNULL,
+            shell=platform.shell_required,
         )
 
         # 3. Initialize TypeScript
         typer.secho("Configuring TypeScript...", fg=typer.colors.CYAN)
         subprocess.run(
-            ["npx", "tsc", "--init"], cwd=project_path, check=True, stdout=subprocess.DEVNULL
+            ["npx", "tsc", "--init"],
+            cwd=project_path,
+            check=True,
+            stdout=subprocess.DEVNULL,
+            shell=platform.shell_required,
         )
 
         # 4. Create folder structure

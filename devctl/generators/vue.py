@@ -37,6 +37,8 @@ def setup_vue_router(project_path: str):
     """
     typer.secho("Installing and configuring vue-router...", fg=typer.colors.CYAN)
 
+    from devctl.utils import get_platform
+    platform = get_platform()
     try:
         # 1. NPM package installation
         subprocess.run(
@@ -44,6 +46,7 @@ def setup_vue_router(project_path: str):
             cwd=project_path,
             check=True,
             stdout=subprocess.DEVNULL,
+            shell=platform.shell_required,
         )
 
         # 2. Router directory creation
@@ -79,16 +82,25 @@ def generate_vue_boilerplate(project_name: str) -> bool:
     typer.secho(f"Generating Vue.js frontend '{project_name}' via Vite...", fg=typer.colors.CYAN)
     safe_name = project_name.lower().replace("_", "-")
 
+    from devctl.utils import get_platform
+    platform = get_platform()
     try:
         typer.secho("Scaffolding Vite project...", fg=typer.colors.CYAN)
         subprocess.run(
-            ["npm", "create", "vite@latest", safe_name, "--", "--template", "vue-ts"], check=True
+            ["npm", "create", "vite@latest", safe_name, "--", "--template", "vue-ts"],
+            check=True,
+            shell=platform.shell_required,
         )
 
         project_full_path = os.path.join(os.getcwd(), safe_name)
 
         typer.secho("Installing npm dependencies...", fg=typer.colors.CYAN)
-        subprocess.run(["npm", "install"], cwd=project_full_path, check=True)
+        subprocess.run(
+            ["npm", "install"],
+            cwd=project_full_path,
+            check=True,
+            shell=platform.shell_required,
+        )
 
         # --- CALL OUR TWO CONFIGURATORS ---
         setup_vue_proxy(project_full_path)

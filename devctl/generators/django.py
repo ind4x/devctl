@@ -28,28 +28,56 @@ django-cors-headers
         with open(os.path.join(project_path, "requirements.txt"), "w") as f:
             f.write(requirements)
 
+        import sys
+        python_exe = "python" if sys.platform == "win32" else "python3"
+
         # 2. Create virtual environment
         typer.secho("Creating virtual environment...", fg=typer.colors.CYAN)
-        subprocess.run(["python3", "-m", "venv", ".venv"], cwd=project_path, check=True)
+        subprocess.run(
+            [python_exe, "-m", "venv", ".venv"],
+            cwd=project_path,
+            check=True,
+            shell=(sys.platform == "win32"),
+        )
 
         # 3. Install Django
         typer.secho("Installing Django and DRF...", fg=typer.colors.CYAN)
-        pip_path = os.path.join(".venv", "bin", "pip")
+        if sys.platform == "win32":
+            pip_path = os.path.join(".venv", "Scripts", "pip.exe")
+        else:
+            pip_path = os.path.join(".venv", "bin", "pip")
         subprocess.run(
             [pip_path, "install", "django", "djangorestframework"],
             cwd=project_path,
             check=True,
             stdout=subprocess.DEVNULL,
+            shell=(sys.platform == "win32"),
         )
 
         # 4. Start Project
         typer.secho("Scaffolding Django project structure...", fg=typer.colors.CYAN)
-        django_admin = os.path.join(".venv", "bin", "django-admin")
-        subprocess.run([django_admin, "startproject", safe_name, "."], cwd=project_path, check=True)
+        if sys.platform == "win32":
+            django_admin = os.path.join(".venv", "Scripts", "django-admin.exe")
+        else:
+            django_admin = os.path.join(".venv", "bin", "django-admin")
+        subprocess.run(
+            [django_admin, "startproject", safe_name, "."],
+            cwd=project_path,
+            check=True,
+            shell=(sys.platform == "win32"),
+        )
 
         # 5. Create core app
-        python_path = os.path.join(".venv", "bin", "python")
-        subprocess.run([python_path, "manage.py", "startapp", "core"], cwd=project_path, check=True)
+        if sys.platform == "win32":
+            python_path = os.path.join(".venv", "Scripts", "python.exe")
+        else:
+            python_path = os.path.join(".venv", "bin", "python")
+        subprocess.run(
+            [python_path, "manage.py", "startapp", "core"],
+            cwd=project_path,
+            check=True,
+            shell=(sys.platform == "win32"),
+        )
 
         typer.secho(
             f"Django project '{project_name}' successfully generated!", fg=typer.colors.GREEN

@@ -13,7 +13,17 @@ def check_tool(tool_name: str, required_for: str = "this operation"):
     Check if a tool is available in the system PATH.
     If not, print a friendly error message and exit.
     """
-    if shutil.which(tool_name) is None:
+    from devctl.utils import get_platform
+    platform = get_platform()
+
+    actual_tool = tool_name
+    if tool_name == "python3" and platform.python_exe == "python":
+        actual_tool = "python"
+
+    if shutil.which(actual_tool) is None:
+        if tool_name == "python3" and shutil.which("python") is not None:
+            return
+
         typer.secho(
             f"\nError: '{tool_name}' is not installed or not in your PATH.",
             fg=typer.colors.RED,

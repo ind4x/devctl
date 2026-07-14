@@ -23,6 +23,8 @@ def generate_nextjs_boilerplate(project_name: str) -> bool:
         # --src-dir: Use src/ directory
         # --app: Use App Router
         # --import-alias: alias for imports
+        from devctl.utils import get_platform
+        platform = get_platform()
         subprocess.run(
             [
                 "npx",
@@ -38,6 +40,7 @@ def generate_nextjs_boilerplate(project_name: str) -> bool:
                 "--use-npm",
             ],
             check=True,
+            shell=platform.shell_required,
         )
 
         typer.secho(

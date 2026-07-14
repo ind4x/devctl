@@ -4,6 +4,18 @@ This document tracks all notable changes to the `devctl` project. The format
 is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - July 14, 2026
+
+### Added
+
+- Cross-platform support: Added full Windows operating system compatibility.
+- Platform abstraction layer: Introduced `BasePlatform`, `WindowsPlatform`, and `UnixPlatform` to cleanly encapsulate OS-specific pathing, shell flags, and execution commands.
+- Unit testing: Added test coverage for the platform helper module (`test_platform.py`).
+
+### Changed
+
+- Refactored orchestrator runner (`runner.py`) and all framework generators to consume the platform abstraction factory instead of executing platform-specific checks inline.
+
 ## [1.0.0] - May 20, 2026
 
 ### Added

@@ -17,6 +17,7 @@ from rich.console import Console
 from rich.markup import escape
 
 from devctl.generators.docker_scaffold import DockerProject
+from devctl.utils import get_platform
 from devctl.utils.env_loader import get_project_env
 
 console = Console()
@@ -56,6 +57,7 @@ def _launch_process(p: DockerProject, cmd: List[str], color: str, label: str):
     # Load environment variables including .env if present
     env = get_project_env(p.path)
 
+    platform = get_platform()
     proc = subprocess.Popen(
         cmd,
         cwd=str(p.path),
@@ -63,6 +65,7 @@ def _launch_process(p: DockerProject, cmd: List[str], color: str, label: str):
         stderr=subprocess.STDOUT,
         bufsize=1,
         env=env,
+        shell=platform.shell_required,
     )
     active_processes.append((p.name, proc))
 
@@ -82,7 +85,11 @@ def launch_dev_environment(projects: List[DockerProject], docker_composes: List[
         cleanup_and_exit(docker_composes)
 
     signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
+    if sys.platform != "win32":
+        signal.signal(signal.SIGTERM, signal_handler)
+    else:
+        if hasattr(signal, "SIGBREAK"):
+            signal.signal(signal.SIGBREAK, signal_handler)
 
     try:
         # 1. Start Databases
@@ -105,10 +112,11 @@ def launch_dev_environment(projects: List[DockerProject], docker_composes: List[
             typer.echo("Waiting 5s for databases to initialize...")
             time.sleep(5)
 
+        platform = get_platform()
         # 2. Start Projects
         for p in projects:
             if p.kind == "spring":
-                _launch_process(p, ["./mvnw", "spring-boot:run"], "green", "Spring Boot")
+                _launch_process(p, [platform.mvnw_cmd, "spring-boot:run"], "green", "Spring Boot")
 
             elif p.kind == "angular":
                 _launch_process(p, ["npx", "ng", "serve"], "cyan", "Angular")
@@ -132,17 +140,17 @@ def launch_dev_environment(projects: List[DockerProject], docker_composes: List[
                 _launch_process(p, ["npm", "run", "dev"], "green", "NodeJS")
 
             elif p.kind == "fastapi":
-                venv_python = os.path.join(str(p.path), ".venv", "bin", "python3")
+                venv_python = platform.get_venv_python(p.path)
                 if not os.path.exists(venv_python):
-                    venv_python = "python3"
+                    venv_python = platform.python_exe
                 _launch_process(
                     p, [venv_python, "-m", "uvicorn", "main:app", "--reload"], "cyan", "FastAPI"
                 )
 
             elif p.kind == "django":
-                venv_python = os.path.join(str(p.path), ".venv", "bin", "python3")
+                venv_python = platform.get_venv_python(p.path)
                 if not os.path.exists(venv_python):
-                    venv_python = "python3"
+                    venv_python = platform.python_exe
                 _launch_process(p, [venv_python, "manage.py", "runserver"], "green", "Django")
 
             elif p.kind == "go":
@@ -193,14 +201,10 @@ def launch_dev_environment(projects: List[DockerProject], docker_composes: List[
 
 def cleanup_and_exit(docker_composes: List[Path]):
     """Stops all active processes and docker containers."""
+    platform = get_platform()
     for name, proc in active_processes:
         typer.echo(f"Closing {name}...")
-        proc.terminate()
-        try:
-            proc.wait(timeout=5)
-        except subprocess.TimeoutExpired:
-            typer.echo(f"Force killing {name}...")
-            proc.kill()
+        platform.kill_process_tree(proc)
 
     for compose_path in docker_composes:
         typer.echo(f"Stopping Docker Compose DB in {compose_path}...")

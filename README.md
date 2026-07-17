@@ -18,6 +18,7 @@ containerization across Linux, macOS, and Windows.
 -   **Instant Infrastructure**: Automatically generate optimized, multi-stage
     `Dockerfiles` and global `docker-compose-prod.yml` configurations by scanning
     your project tree.
+-   **Interactive Dashboard**: Real-time system monitoring (CPU/RAM/Disk) and service orchestration with side-by-side log streaming (`devctl tui`).
 -   **Security by Default**: Inject standardized JWT authentication and security
     configurations into new projects.
 
@@ -69,8 +70,10 @@ devctl run
 
 ## Documentation
 
-For a detailed reference of all available commands and their options, see the
-[Commands Reference](COMMANDS.md).
+*   For a detailed reference of all available commands and their options, see the
+    [Commands Reference](COMMANDS.md).
+*   For an overview of the internal code structures and process pipelines, see the
+    [Architecture Guide](ARCHITECTURE.md).
 
 ## Contributing
 

@@ -91,7 +91,24 @@ Prepare for multi-service production or staging deployments.
 
 ---
 
-## 6. Utilities
+## 6. Interactive Dashboard (`devctl tui`)
+
+Launch the interactive dashboard to manage local microservices, track system metrics, and view service logs in real time.
+
+| Command | Usage | Description |
+| :--- | :--- | :--- |
+| **Interactive TUI** | `devctl tui` | Launches the multi-tab interactive developer dashboard. |
+
+### Options
+*   `--single` / `-s`: Launches a dense, single-panel console viewport displaying system monitors, active services lists, and logs simultaneously on one screen.
+
+### Navigation Keybindings
+*   `Left Arrow / Right Arrow`: Cycle page views.
+*   `q`: Quit the application.
+
+---
+
+## 7. Utilities
 
 | Command | Usage | Description |
 | :--- | :--- | :--- |

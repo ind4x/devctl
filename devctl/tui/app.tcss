@@ -1,0 +1,355 @@
+Screen {
+    background: $background;
+    color: $text;
+}
+
+Header {
+    background: $surface;
+    color: $primary;
+    text-align: center;
+    text-style: bold;
+    height: 1;
+}
+
+Footer {
+    background: $background;
+    color: $text-muted;
+}
+
+TabbedContent {
+    height: 1fr;
+}
+
+/* Custom Textual Tabs Styling (htop style) */
+ContentTabs {
+    height: 1;
+    background: $background;
+    border-bottom: solid $border;
+}
+
+ContentTabs Tab {
+    height: 1;
+    padding: 0 2;
+    background: $background;
+    color: $text-muted;
+}
+
+ContentTabs Tab:hover {
+    background: $surface;
+    color: $text;
+}
+
+ContentTabs Tab.--active {
+    background: $primary;
+    color: $background;
+    text-style: bold;
+}
+
+/* TabPane and container rules */
+TabPane {
+    padding: 0;
+}
+
+.dashboard-container {
+    padding: 0 2;
+    layout: vertical;
+    overflow-y: auto;
+}
+
+.dashboard-title {
+    text-style: bold;
+    color: $primary;
+    margin-top: 1;
+    margin-bottom: 0;
+}
+
+.dashboard-card {
+    background: $background;
+    border: solid $border;
+    margin-bottom: 1;
+    padding: 0 2;
+    layout: vertical;
+}
+
+.framework-item {
+    margin-bottom: 0;
+    padding: 0 1;
+    border-left: solid $success;
+    background: $background;
+}
+
+/* Services Control Tab Layout */
+.services-container {
+    height: 1fr;
+    width: 100%;
+}
+
+.services-list-panel {
+    background: $background;
+    border-right: solid $border;
+    padding: 0 1;
+    width: 7fr;
+    height: 100%;
+}
+
+#services-list {
+    height: 1fr;
+    border: solid $border;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+.logs-panel {
+    background: $background;
+    padding: 0 1;
+    layout: vertical;
+    width: 9fr;
+    height: 100%;
+}
+
+.logs-title-bar {
+    text-style: bold;
+    color: $text-muted;
+    border-bottom: solid $border;
+    padding-bottom: 0;
+    margin-bottom: 1;
+    height: 1;
+}
+
+.logs-view {
+    background: $background;
+    color: $text;
+    height: 1fr;
+    border: solid $border;
+}
+
+.service-item-row {
+    padding: 0 1;
+    margin-bottom: 0;
+    background: $background;
+    border: none;
+    layout: horizontal;
+    height: 1;
+}
+
+.service-item-row:hover {
+    background: $surface;
+    color: $text;
+}
+
+.service-item-row.selected {
+    background: $accent;
+    color: $background;
+    text-style: bold;
+}
+
+.service-item-row .status-label {
+    text-style: bold;
+    margin-left: 2;
+}
+
+.service-item-row .metric-label {
+    margin-left: 2;
+    color: $text-muted;
+}
+
+/* Docker and Scaffolding Forms */
+.form-container {
+    padding: 0 2;
+    layout: vertical;
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-top: 1;
+    margin-bottom: 1;
+    layout: vertical;
+}
+
+.form-label {
+    text-style: bold;
+    color: $text-muted;
+    margin-bottom: 0;
+}
+
+/* CLI style Inputs: 1 cell tall, no border, colored bg */
+.form-input {
+    background: $surface;
+    color: $text;
+    height: 1;
+    border: none;
+    padding: 0 1;
+    width: 60;
+}
+
+.form-input:focus {
+    background: $accent;
+    color: $background;
+}
+
+/* Select Dropdown: 1 cell tall, no border */
+Select {
+    height: 1;
+    border: none;
+    width: 60;
+    min-height: 1;
+}
+
+SelectCurrent {
+    height: 1;
+    border: none;
+    background: $surface;
+    padding: 0 1;
+}
+
+SelectCurrent:focus {
+    background: $accent;
+    color: $background;
+}
+
+.form-checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* CLI style Buttons: 1 cell tall, highlighted bg, no border */
+Button {
+    background: $surface;
+    color: $text;
+    height: 1;
+    border: none;
+    padding: 0 2;
+    min-width: 8;
+}
+
+Button:hover {
+    background: $accent;
+    color: $background;
+}
+
+/* Submit Button Specifics */
+.submit-button {
+    background: $primary;
+    color: $background;
+    text-style: bold;
+    margin-top: 1;
+    margin-bottom: 1;
+    width: 30;
+}
+
+.submit-button:hover {
+    background: $success;
+    color: $background;
+}
+
+.form-container Horizontal {
+    height: 1;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+.form-container Horizontal Button {
+    width: 30;
+    margin-right: 2;
+}
+
+.form-output-panel {
+    background: $background;
+    border: solid $border;
+    padding: 1;
+    height: 15;
+    color: $success;
+    overflow-y: scroll;
+}
+
+/* Toolbars inside Services and Single Panel */
+#service-control-toolbar, #service-control-bulk-toolbar {
+    height: 1;
+    margin-top: 1;
+    margin-bottom: 1;
+}
+
+#service-control-toolbar Button, #service-control-bulk-toolbar Button {
+    width: 1fr;
+    min-width: 0;
+    margin-right: 1;
+    height: 1;
+}
+
+#lbl-srv-controls {
+    margin-top: 1;
+}
+
+#spring-db-group {
+    margin-top: 1;
+}
+
+/* Single Panel Layout Styles */
+#single-container {
+    height: 1fr;
+    width: 100%;
+    layout: vertical;
+}
+
+#single-top-row {
+    height: 7;
+    width: 100%;
+    border-bottom: solid $border;
+}
+
+#single-system-info {
+    width: 6fr;
+    height: 100%;
+    border-right: solid $border;
+    padding: 0 2;
+}
+
+#single-db-summary {
+    width: 4fr;
+    height: 100%;
+    padding: 0 2;
+}
+
+#single-bottom-row {
+    height: 1fr;
+    width: 100%;
+}
+
+#single-services-panel {
+    width: 7fr;
+    height: 100%;
+    border-right: solid $border;
+    padding: 0 1;
+}
+
+#single-logs-panel {
+    width: 9fr;
+    height: 100%;
+    padding: 0 1;
+}
+
+.section-title {
+    text-style: bold;
+    color: $primary;
+    margin-bottom: 0;
+}
+
+/* Navigation Helper Bar Styles */
+#top-nav-helper {
+    height: 1;
+    background: $surface;
+    layout: horizontal;
+    align: center middle;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.nav-arrow {
+    text-style: bold;
+    color: $primary;
+    padding: 0 2;
+}
+
+#nav-hint-text {
+    color: $text;
+}

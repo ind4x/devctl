@@ -45,6 +45,7 @@ pydantic
             f.write(requirements)
 
         import sys
+
         python_exe = "python" if sys.platform == "win32" else "python3"
 
         # 3. Create virtual environment

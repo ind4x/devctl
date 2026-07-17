@@ -14,6 +14,7 @@ def check_tool(tool_name: str, required_for: str = "this operation"):
     If not, print a friendly error message and exit.
     """
     from devctl.utils import get_platform
+
     platform = get_platform()
 
     actual_tool = tool_name

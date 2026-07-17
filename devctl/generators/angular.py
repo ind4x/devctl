@@ -80,6 +80,7 @@ def generate_angular_boilerplate(project_name: str) -> bool:
     safe_name = project_name.lower().replace("_", "-")
 
     from devctl.utils import get_platform
+
     platform = get_platform()
     try:
         subprocess.run(

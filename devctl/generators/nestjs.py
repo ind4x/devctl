@@ -22,6 +22,7 @@ def generate_nest_boilerplate(project_name: str) -> bool:
         # --skip-git: devctl might be in a git repo already
         typer.secho("Scaffolding NestJS project (this may take a minute)...", fg=typer.colors.CYAN)
         from devctl.utils import get_platform
+
         platform = get_platform()
         subprocess.run(
             [

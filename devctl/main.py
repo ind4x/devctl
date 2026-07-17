@@ -1,7 +1,7 @@
 import typer
 
 # Import command modules
-from devctl.commands import add, deploy, docker, init, run
+from devctl.commands import add, deploy, docker, init, run, tui
 
 # Create the main Typer application
 app = typer.Typer(help="devctl: Local orchestrator for your Spring/Angular projects")
@@ -10,6 +10,7 @@ app = typer.Typer(help="devctl: Local orchestrator for your Spring/Angular proje
 app.add_typer(init.app, name="init", help="Initialize a new project with its codebase.")
 app.add_typer(run.app, name="run", help="Launch the local development environment in parallel.")
 app.add_typer(add.app, name="add", help="Generate code and business resources.")
+app.add_typer(tui.app, name="tui", help="Launch the interactive terminal dashboard.")
 
 app.command("dockerize", help="Scaffold Dockerfiles for supported projects.")(docker.dockerize)
 app.command("deploy", help="Generate a global docker-compose-prod.yml for the entire project.")(

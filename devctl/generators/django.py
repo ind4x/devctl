@@ -29,6 +29,7 @@ django-cors-headers
             f.write(requirements)
 
         import sys
+
         python_exe = "python" if sys.platform == "win32" else "python3"
 
         # 2. Create virtual environment

@@ -19,6 +19,7 @@ def generate_svelte_boilerplate(project_name: str) -> bool:
     try:
         typer.secho("Scaffolding SvelteKit project...", fg=typer.colors.CYAN)
         from devctl.utils import get_platform
+
         platform = get_platform()
         # Using a non-interactive way to scaffold svelte
         # We'll use the 'skeleton' template with TypeScript

@@ -18,6 +18,7 @@ def generate_react_boilerplate(project_name: str) -> bool:
 
     try:
         from devctl.utils import get_platform
+
         platform = get_platform()
         typer.secho("Scaffolding React project...", fg=typer.colors.CYAN)
         subprocess.run(

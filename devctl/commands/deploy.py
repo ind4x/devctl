@@ -20,6 +20,7 @@ FORCE_OPTION = typer.Option(
     help="Overwrite generated Docker files that already exist.",
 )
 
+
 @app.command()
 def deploy(
     path: Path = PATH_ARGUMENT,

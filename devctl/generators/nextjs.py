@@ -24,6 +24,7 @@ def generate_nextjs_boilerplate(project_name: str) -> bool:
         # --app: Use App Router
         # --import-alias: alias for imports
         from devctl.utils import get_platform
+
         platform = get_platform()
         subprocess.run(
             [

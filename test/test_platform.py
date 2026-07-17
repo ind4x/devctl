@@ -29,12 +29,8 @@ def test_windows_platform():
     assert p.shell_required is True
 
     path = Path("proj")
-    assert p.get_venv_python(path) == os.path.join(
-        "proj", ".venv", "Scripts", "python.exe"
-    )
-    assert p.get_venv_pip(path) == os.path.join(
-        "proj", ".venv", "Scripts", "pip.exe"
-    )
+    assert p.get_venv_python(path) == os.path.join("proj", ".venv", "Scripts", "python.exe")
+    assert p.get_venv_pip(path) == os.path.join("proj", ".venv", "Scripts", "pip.exe")
     assert p.get_venv_django_admin(path) == os.path.join(
         "proj", ".venv", "Scripts", "django-admin.exe"
     )

@@ -22,6 +22,7 @@ def generate_nodejs_boilerplate(project_name: str) -> bool:
         os.makedirs(project_path, exist_ok=True)
 
         from devctl.utils import get_platform
+
         platform = get_platform()
         # 1. Initialize package.json
         typer.secho("Initializing package.json...", fg=typer.colors.CYAN)

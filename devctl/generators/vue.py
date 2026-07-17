@@ -38,6 +38,7 @@ def setup_vue_router(project_path: str):
     typer.secho("Installing and configuring vue-router...", fg=typer.colors.CYAN)
 
     from devctl.utils import get_platform
+
     platform = get_platform()
     try:
         # 1. NPM package installation
@@ -83,6 +84,7 @@ def generate_vue_boilerplate(project_name: str) -> bool:
     safe_name = project_name.lower().replace("_", "-")
 
     from devctl.utils import get_platform
+
     platform = get_platform()
     try:
         typer.secho("Scaffolding Vite project...", fg=typer.colors.CYAN)

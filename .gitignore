@@ -15,3 +15,6 @@ dist/
 
 # Dossier pycharm
 .idea/
+
+# Local personal study guide
+study.md

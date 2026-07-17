@@ -4,6 +4,16 @@ This document tracks all notable changes to the `devctl` project. The format
 is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - July 17, 2026
+
+### Added
+
+- Interactive CLI TUI: Introduced a comprehensive dashboard for scanning projects, managing processes, and viewing live logs.
+- System metrics: Added real-time CPU, RAM, and Disk space tracking progress bars.
+- Single-panel layout: Support for a dense, single-viewport dashboard rendering (triggered via `devctl tui --single`).
+- Keyboard navigation bar: Added arrow key navigation bar hints to quickly shift between views.
+- Test coverage: Expanded coverage with `test_tui.py` for testing widgets, progress indicators, and compose states.
+
 ## [1.1.0] - July 14, 2026
 
 ### Added

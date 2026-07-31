@@ -22,6 +22,30 @@ containerization across Linux, macOS, and Windows.
 -   **Security by Default**: Inject standardized JWT authentication and security
     configurations into new projects.
 
+## Interactive Dashboard (TUI)
+
+Launch the real-time terminal dashboard using `devctl tui`:
+
+### Dashboard & System Monitoring
+![Dashboard View](screenshots/tui_dashboard.png)
+
+### Real-Time Service Controls & Log Streaming
+![Services Control View](screenshots/tui_services_control.png)
+
+<details>
+<summary><b>View More TUI Views (Docker, Scaffolding, Project Init)</b></summary>
+
+#### Docker Tools
+![Docker Scaffolding](screenshots/tui_docker_tools.png)
+
+#### Vertical Resource Generator
+![Add Resource Generator](screenshots/tui_add_resource.png)
+
+#### Project Initializer
+![Init Project Generator](screenshots/tui_init_project.png)
+
+</details>
+
 ## Installation
 
 You can install `devctl` locally for development:

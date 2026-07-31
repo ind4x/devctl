@@ -522,24 +522,44 @@ class DevctlTUI(App):
                 line = service.logs.pop(0)
                 log_view.write_line(line)
 
+    def _get_target_service(self) -> str | None:
+        if self.selected_service and self.selected_service in self.manager.services:
+            return self.selected_service
+        try:
+            lv = self.query_one("#services-list", ListView)
+            if lv.highlighted_child and isinstance(lv.highlighted_child, ServiceItem):
+                return lv.highlighted_child.service_name
+        except Exception:
+            pass
+        if self.manager.services:
+            return next(iter(self.manager.services.keys()))
+        return None
+
     def on_list_view_selected(self, event: ListView.Selected) -> None:
-        if event.item:
+        if event.item and isinstance(event.item, ServiceItem):
             self.selected_service = event.item.service_name
             log_view = self.query_one("#logs-view", Log)
             log_view.clear()
             log_view.write_line(f"--- Viewing logs for {self.selected_service} ---")
 
+    def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
+        if event.item and isinstance(event.item, ServiceItem):
+            self.selected_service = event.item.service_name
+
     def action_start_selected(self) -> None:
-        if self.selected_service:
-            self.manager.start_service(self.selected_service)
+        target = self._get_target_service()
+        if target:
+            self.manager.start_service(target)
 
     def action_stop_selected(self) -> None:
-        if self.selected_service:
-            self.manager.stop_service(self.selected_service)
+        target = self._get_target_service()
+        if target:
+            self.manager.stop_service(target)
 
     def action_restart_selected(self) -> None:
-        if self.selected_service:
-            self.manager.restart_service(self.selected_service)
+        target = self._get_target_service()
+        if target:
+            self.manager.restart_service(target)
 
     def action_start_all(self) -> None:
         for name in self.manager.services.keys():

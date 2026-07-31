@@ -41,8 +41,12 @@ def test_tui_command_help():
     """Verify cli runner registers tui commands and options."""
     result = runner.invoke(app, ["tui", "--help"])
     assert result.exit_code == 0
-    assert "--single" in result.stdout
-    assert "-s" in result.stdout
+    # Strip ANSI styling codes emitted by Rich/Typer in CI environments
+    import re
+
+    clean_output = re.sub(r"\x1b\[[0-9;]*m", "", result.stdout)
+    assert "--single" in clean_output
+    assert "-s" in clean_output
 
 
 @patch("devctl.tui.app.discover_docker_projects")

@@ -1,0 +1,36 @@
+name: Bug Report
+description: Create a report to help us fix a bug
+labels: ["bug"]
+body:
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Run 'devctl init spring api'
+        2. Execute 'devctl run'
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: OS Platform
+      placeholder: e.g. Fedora 44, Ubuntu 24.04, macOS Sonoma, Windows 11
+    validations:
+      required: true

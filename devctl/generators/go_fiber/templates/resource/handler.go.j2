@@ -1,0 +1,13 @@
+package handlers
+
+import (
+    "github.com/gofiber/fiber/v2"
+)
+
+func Get{{ entity_name }}s(c *fiber.Ctx) error {
+    return c.JSON(fiber.Map{"message": "Get all {{ resource_lower }}s"})
+}
+
+func Create{{ entity_name }}(c *fiber.Ctx) error {
+    return c.Status(201).JSON(fiber.Map{"message": "{{ entity_name }} created"})
+}

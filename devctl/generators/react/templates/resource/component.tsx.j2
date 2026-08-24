@@ -1,0 +1,19 @@
+import React from 'react';
+
+export const {{ entity_name }}List: React.FC = () => {
+  return (
+    <div>
+      <h1>{{ entity_name }} List</h1>
+      <p>Manage your {{ resource_lower }}s here.</p>
+    </div>
+  );
+};
+
+export const {{ entity_name }}Form: React.FC = () => {
+  return (
+    <form>
+      <h1>Create {{ entity_name }}</h1>
+      {{ fields_str }}
+    </form>
+  );
+};

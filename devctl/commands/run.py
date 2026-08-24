@@ -7,7 +7,7 @@ from pathlib import Path
 
 import typer
 
-from devctl.generators.docker_scaffold import discover_docker_projects
+from devctl.generators.docker import discover_docker_projects
 from devctl.orchestrator.runner import launch_dev_environment
 from devctl.utils.dependencies import check_tool
 

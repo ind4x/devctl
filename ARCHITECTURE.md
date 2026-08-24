@@ -2,7 +2,7 @@
 
 This document describes the design, directory layout, and orchestration
 mechanisms of the `devctl` developer tool. Use this guide to understand how
-the system scans local directories, boots service environments, executes code
+the system scans local directories, boots service environments, executes modular code
 generators, and powers the interactive Terminal User Interface (TUI).
 
 ---
@@ -10,7 +10,7 @@ generators, and powers the interactive Terminal User Interface (TUI).
 ## Architecture Overview
 
 The `devctl` application is structured into four functional layers: the
-Command-Line Interface (CLI) controller, the Orchestrator Engine, the Code
+Command-Line Interface (CLI) controller, the Orchestrator Engine, the Modular Code
 Generators, and the Interactive TUI. It operates as a local daemon-less utility
 run directly within a project repository.
 
@@ -19,7 +19,10 @@ graph TD
     CLI[CLI Entrypoint: main.py] --> CmdGroups[Commands: init, run, docker, deploy, add, tui]
     CmdGroups --> Scanner[Scanner: scanner.py]
     CmdGroups --> ProcessMgr[Orchestrator: process_manager.py]
-    CmdGroups --> Generators[Generators: devctl/generators/]
+    CmdGroups --> Generators[Generators Package: devctl/generators/]
+    Generators --> FrameworkPackages[Framework Packages: fastapi, angular, spring, etc.]
+    FrameworkPackages --> Templates[Local Templates: templates/]
+    FrameworkPackages --> UnitTests[Local Framework Tests: tests/]
     TUI[TUI: devctl/tui/app.py] --> ProcessMgr
     TUI --> Scanner
 ```
@@ -64,12 +67,26 @@ The process scanning and management logic is isolated under
   CPU percentage and resident memory allocations (RSS) for both parent and child
   processes.
 
-### 3. Code generators
-Code scaffolding utilities reside in
+### 3. Modular Code Generators & Self-Contained Packages
+Code scaffolding utilities reside in subdirectories under
 [devctl/generators/](file:///home/youssef/Projects/Personal/Apps/devctl/devctl/generators/).
-These utilities consume `Jinja2` templates located inside the `devctl/templates`
-directory to generate boilerplate structures matching the chosen language standards,
-for example, controllers, database repositories, or frontend services.
+
+Each framework operates as a **100% self-contained module** combining code, templates, and unit tests:
+```text
+devctl/generators/<framework>/
+├── __init__.py         # Exposes clean public API (e.g. generate_*_boilerplate, generate_*_resource)
+├── generator.py        # Project setup & dependency installation
+├── scaffolder.py       # Entity & resource scaffolding
+├── templates/          # Jinja2 template files (.j2)
+│   ├── config/         # Boilerplate configuration templates
+│   └── resource/       # Component, router, model & service templates
+└── tests/              # Local framework unit tests
+    ├── __init__.py
+    └── test_<framework>.py
+```
+
+Supported framework packages include:
+- `angular`, `django`, `docker`, `fastapi`, `go_fiber`, `nestjs`, `nextjs`, `nodejs`, `react`, `spring`, `svelte`, `vue`
 
 ### 4. Interactive TUI
 The user interface is powered by `Textual` and resides under
@@ -111,6 +128,8 @@ Use the links below to inspect specific sections of the implementation:
 
 * **Entrypoint & Subcommands Setup**:
   [main.py](file:///home/youssef/Projects/Personal/Apps/devctl/devctl/main.py#L1-L20)
+* **Framework Package Structure**:
+  [devctl/generators/](file:///home/youssef/Projects/Personal/Apps/devctl/devctl/generators/)
 * **Process manager thread loops**:
   [process_manager.py:L130-L170](file:///home/youssef/Projects/Personal/Apps/devctl/devctl/orchestrator/process_manager.py#L130-L170)
 * **System statistics calculation**:

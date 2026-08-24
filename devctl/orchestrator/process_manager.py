@@ -8,7 +8,7 @@ from typing import Dict, List, Optional
 
 import psutil
 
-from devctl.generators.docker_scaffold import DockerProject
+from devctl.generators.docker import DockerProject
 from devctl.utils import get_platform
 from devctl.utils.env_loader import get_project_env
 

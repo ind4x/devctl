@@ -1,0 +1,7 @@
+from rest_framework import viewsets
+from .models import {{ entity_name }}
+from .serializers import {{ entity_name }}Serializer
+
+class {{ entity_name }}ViewSet(viewsets.ModelViewSet):
+    queryset = {{ entity_name }}.objects.all()
+    serializer_class = {{ entity_name }}Serializer

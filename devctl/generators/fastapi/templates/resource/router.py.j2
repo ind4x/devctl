@@ -1,0 +1,16 @@
+from fastapi import APIRouter, HTTPException
+from typing import List
+from schemas import {{ resource_lower }} as schemas
+
+router = APIRouter(
+    prefix="/{{ resource_lower }}s",
+    tags=["{{ resource_lower }}s"]
+)
+
+@router.get("/", response_model=List[schemas.{{ entity_name }}])
+def read_{{ resource_lower }}s():
+    return []
+
+@router.post("/", response_model=schemas.{{ entity_name }})
+def create_{{ resource_lower }}(item: schemas.{{ entity_name }}Create):
+    return {"id": 1, **item.dict()}

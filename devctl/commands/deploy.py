@@ -2,7 +2,7 @@ from pathlib import Path
 
 import typer
 
-from devctl.generators.docker_scaffold import (
+from devctl.generators.docker import (
     DockerScaffoldError,
     scaffold_docker_assets,
 )

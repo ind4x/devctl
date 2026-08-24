@@ -81,6 +81,7 @@ Store boilerplate and resource stubs as Jinja2 templates:
    import typer
    from jinja2 import Environment, FileSystemLoader
 
+
    def generate_myframework_boilerplate(project_name: str) -> bool:
        # Render templates from local templates/config folder
        templates_dir = os.path.join(os.path.dirname(__file__), "templates", "config")
@@ -94,6 +95,7 @@ Store boilerplate and resource stubs as Jinja2 templates:
    import os
    import typer
    from jinja2 import Environment, FileSystemLoader
+
 
    def generate_myframework_resource(resource_name: str, fields_str: str, root_path: str = "."):
        templates_dir = os.path.join(os.path.dirname(__file__), "templates", "resource")
@@ -125,15 +127,16 @@ Create `devctl/generators/myframework/tests/test_myframework.py` to test boilerp
 
 ```python
 from typer.testing import CliRunner
+
 from devctl.generators.myframework import generate_myframework_boilerplate
 
 runner = CliRunner()
 
-def test_init_myframework(tmp_path):
-    ...
 
-def test_add_resource_myframework(tmp_path):
-    ...
+def test_init_myframework(tmp_path): ...
+
+
+def test_add_resource_myframework(tmp_path): ...
 ```
 
 ### Step 6: Register the Framework in Commands & Scanner

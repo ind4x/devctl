@@ -33,7 +33,7 @@ devctl = "devctl.main:main"
 
 [tool.setuptools.packages.find]
 include = ["devctl*"]
-exclude = ["samples*", "test*"]
+exclude = ["samples*", "test*", "*.tests*"]
 
 [tool.setuptools.package-data]
-devctl = ["templates/**/*.j2"]
+devctl = ["generators/**/templates/**/*.j2"]

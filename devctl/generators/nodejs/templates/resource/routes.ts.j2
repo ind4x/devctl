@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import * as {{ resource_lower }}Controller from '../controllers/{{ resource_lower }}.controller';
+
+const router = Router();
+
+router.get('/', {{ resource_lower }}Controller.get{{ entity_name }}s);
+router.get('/:id', {{ resource_lower }}Controller.get{{ entity_name }}ById);
+router.post('/', {{ resource_lower }}Controller.create{{ entity_name }});
+
+export default router;

@@ -1,0 +1,15 @@
+from pydantic import BaseModel
+from typing import Optional
+
+class {{ entity_name }}Base(BaseModel):
+    # Fields: {{ fields_str }}
+    pass
+
+class {{ entity_name }}Create({{ entity_name }}Base):
+    pass
+
+class {{ entity_name }}({{ entity_name }}Base):
+    id: int
+
+    class Config:
+        orm_mode = True

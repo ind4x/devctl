@@ -1,0 +1,13 @@
+export const fetch{{ entity_name }}s = async () => {
+  const response = await fetch('/api/{{ resource_lower }}s');
+  return response.json();
+};
+
+export const create{{ entity_name }} = async (data: any) => {
+  const response = await fetch('/api/{{ resource_lower }}s', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
+  });
+  return response.json();
+};

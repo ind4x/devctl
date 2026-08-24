@@ -1,0 +1,18 @@
+import { Request, Response } from 'express';
+
+export const get{{ entity_name }}s = (req: Request, res: Response) => {
+  res.json({ message: 'Get all {{ resource_lower }}s' });
+};
+
+export const get{{ entity_name }}ById = (req: Request, res: Response) => {
+  const { id } = req.params;
+  res.json({ message: `Get {{ resource_lower }} with id ${id}` });
+};
+
+export const create{{ entity_name }} = (req: Request, res: Response) => {
+  const data = req.body;
+  res.status(201).json({
+    message: '{{ entity_name }} created',
+    data
+  });
+};

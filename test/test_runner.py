@@ -2,7 +2,7 @@ import subprocess
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from devctl.generators.docker_scaffold import DockerProject
+from devctl.generators.docker import DockerProject
 from devctl.orchestrator.runner import is_docker_running, launch_dev_environment
 
 

@@ -55,7 +55,7 @@ from devctl.commands.init import (
     generate_svelte_boilerplate,
     generate_vue_boilerplate,
 )
-from devctl.generators.docker_scaffold import discover_docker_projects, scaffold_docker_assets
+from devctl.generators.docker import discover_docker_projects, scaffold_docker_assets
 from devctl.orchestrator.config_builder import generate_config
 from devctl.orchestrator.process_manager import ProcessManager
 from devctl.orchestrator.scanner import detect_environment

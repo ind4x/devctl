@@ -8,17 +8,17 @@ import os
 
 import typer
 
-from devctl.generators.scaffold_angular import generate_angular_resource
-from devctl.generators.scaffold_django import generate_django_resource
-from devctl.generators.scaffold_fastapi import generate_fastapi_resource
-from devctl.generators.scaffold_go import generate_go_resource
-from devctl.generators.scaffold_nestjs import generate_nest_resource
-from devctl.generators.scaffold_nextjs import generate_nextjs_resource
-from devctl.generators.scaffold_nodejs import generate_nodejs_resource
-from devctl.generators.scaffold_react import generate_react_resource
-from devctl.generators.scaffold_spring import generate_spring_resource
-from devctl.generators.scaffold_svelte import generate_svelte_resource
-from devctl.generators.scaffold_vue import generate_vue_resource
+from devctl.generators.angular import generate_angular_resource
+from devctl.generators.django import generate_django_resource
+from devctl.generators.fastapi import generate_fastapi_resource
+from devctl.generators.go_fiber import generate_go_resource
+from devctl.generators.nestjs import generate_nest_resource
+from devctl.generators.nextjs import generate_nextjs_resource
+from devctl.generators.nodejs import generate_nodejs_resource
+from devctl.generators.react import generate_react_resource
+from devctl.generators.spring import generate_spring_resource
+from devctl.generators.svelte import generate_svelte_resource
+from devctl.generators.vue import generate_vue_resource
 from devctl.orchestrator.scanner import detect_environment
 from devctl.utils.dependencies import check_tool
 

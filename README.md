@@ -51,7 +51,7 @@ Launch the real-time terminal dashboard using `devctl tui`:
 You can install `devctl` locally for development:
 
 ```bash
-git clone https://github.com/yss-ef/devctl.git
+git clone https://github.com/ind4x/devctl.git
 cd devctl
 pip install -e .
 ```

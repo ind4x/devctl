@@ -4,6 +4,22 @@ This document tracks all notable changes to the `devctl` project. The format
 is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.3] - August 29, 2026
+
+### Fixed
+
+- **SvelteKit Generator:** Fixed `sv create` CLI flags (`--template minimal`, `--types ts`, and `--no-add-ons`) for compatibility with Svelte CLI v0.17+.
+- **Vite Generators:** Added `--no-interactive` flags to `npm create vite@latest` in React and Vue generators for non-interactive execution.
+- **Node.js Generator & Templates:** Fixed `ts-node` type imports in Jinja templates and auto-patched `tsconfig.json` (`verbatimModuleSyntax: false`).
+- **TUI Select Component:** Removed fixed height CSS constraints (`height: 1`) on `Select` containers in `app.tcss` and added default initial selections (`value="spring"`).
+- **TUI Thread Safety:** Wrapped UI updates in `call_from_thread` within `trigger_rescan_and_refresh` to prevent cross-thread widget state mutations.
+
+## [1.2.2] - August 24, 2026
+
+### Changed
+
+- **Version Bump:** Bumped project version to 1.2.2.
+
 ## [1.2.1] - August 24, 2026
 
 ### Added

@@ -56,7 +56,7 @@ def setup_vue_router(project_path: str):
         os.makedirs(router_dir, exist_ok=True)
 
         # 3. Jinja2 template rendering
-        templates_dir = os.path.join(os.path.dirname(__file__), "..", "templates", "vue", "config")
+        templates_dir = os.path.join(os.path.dirname(__file__), "templates", "config")
         env = Environment(loader=FileSystemLoader(templates_dir))
 
         files_to_generate = {
@@ -89,7 +89,7 @@ def generate_vue_boilerplate(project_name: str) -> bool:
     try:
         typer.secho("Scaffolding Vite project...", fg=typer.colors.CYAN)
         subprocess.run(
-            ["npm", "create", "vite@latest", safe_name, "--", "--template", "vue-ts"],
+            ["npm", "create", "vite@latest", safe_name, "--", "--template", "vue-ts", "--no-interactive"],
             check=True,
             shell=platform.shell_required,
         )

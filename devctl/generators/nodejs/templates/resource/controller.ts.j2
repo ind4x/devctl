@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 
 export const get{{ entity_name }}s = (req: Request, res: Response) => {
   res.json({ message: 'Get all {{ resource_lower }}s' });

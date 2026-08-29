@@ -22,7 +22,7 @@ def generate_react_boilerplate(project_name: str) -> bool:
         platform = get_platform()
         typer.secho("Scaffolding React project...", fg=typer.colors.CYAN)
         subprocess.run(
-            ["npm", "create", "vite@latest", safe_name, "--", "--template", "react-ts"],
+            ["npm", "create", "vite@latest", safe_name, "--", "--template", "react-ts", "--no-interactive"],
             check=True,
             shell=platform.shell_required,
         )

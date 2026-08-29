@@ -347,6 +347,7 @@ class DevctlTUI(App):
                         ]
                         yield Select(
                             frameworks,
+                            value="spring",
                             prompt="Choose target framework",
                             id="init-project-framework",
                         )
@@ -456,8 +457,10 @@ class DevctlTUI(App):
         if not self.single_panel:
             try:
                 select_add = self.query_one("#add-resource-target", Select)
-                options = [(f"{p.name} ({p.kind})", p.name) for p in self.projects]
-                select_add.options = options
+                options = [(f"{p.name} ({p.kind.upper()})", p.name) for p in self.projects]
+                select_add.set_options(options)
+                if options and (select_add.value == Select.BLANK or select_add.value is None):
+                    select_add.value = options[0][1]
             except Exception:
                 pass
 
@@ -797,11 +800,19 @@ class DevctlTUI(App):
         self.trigger_rescan_and_refresh()
 
     def trigger_rescan_and_refresh(self) -> None:
-        """Helper to safely perform rescan and trigger UI updates."""
-        self.perform_rescan()
-        self.refresh_ui_elements()
+        """Helper to safely perform rescan and trigger UI updates from background threads."""
+        def _refresh():
+            self.perform_rescan()
+            self.refresh_ui_elements()
+
+        self.call_from_thread(_refresh)
 
     def on_unmount(self) -> None:
+        """Stops all running background services and containers when quitting TUI."""
+        try:
+            self.action_stop_all()
+        except Exception:
+            pass
         self.manager.cleanup_all()
 
 

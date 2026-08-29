@@ -189,10 +189,8 @@ TabPane {
 
 /* Select Dropdown: 1 cell tall, no border */
 Select {
-    height: 1;
     border: none;
     width: 60;
-    min-height: 1;
 }
 
 SelectCurrent {

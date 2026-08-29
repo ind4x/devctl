@@ -75,6 +75,16 @@ def generate_nodejs_boilerplate(project_name: str) -> bool:
             shell=platform.shell_required,
         )
 
+        # Patch tsconfig.json to disable verbatimModuleSyntax for ES module compatibility
+        tsconfig_path = os.path.join(project_path, "tsconfig.json")
+        if os.path.exists(tsconfig_path):
+            with open(tsconfig_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            # Replace verbatimModuleSyntax if present or add option
+            content = content.replace('"verbatimModuleSyntax": true', '"verbatimModuleSyntax": false')
+            with open(tsconfig_path, "w", encoding="utf-8") as f:
+                f.write(content)
+
         # 4. Create folder structure
         os.makedirs(os.path.join(project_path, "src"), exist_ok=True)
 

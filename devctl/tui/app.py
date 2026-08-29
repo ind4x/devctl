@@ -801,6 +801,7 @@ class DevctlTUI(App):
 
     def trigger_rescan_and_refresh(self) -> None:
         """Helper to safely perform rescan and trigger UI updates from background threads."""
+
         def _refresh():
             self.perform_rescan()
             self.refresh_ui_elements()

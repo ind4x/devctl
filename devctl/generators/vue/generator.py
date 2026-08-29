@@ -89,7 +89,16 @@ def generate_vue_boilerplate(project_name: str) -> bool:
     try:
         typer.secho("Scaffolding Vite project...", fg=typer.colors.CYAN)
         subprocess.run(
-            ["npm", "create", "vite@latest", safe_name, "--", "--template", "vue-ts", "--no-interactive"],
+            [
+                "npm",
+                "create",
+                "vite@latest",
+                safe_name,
+                "--",
+                "--template",
+                "vue-ts",
+                "--no-interactive",
+            ],
             check=True,
             shell=platform.shell_required,
         )

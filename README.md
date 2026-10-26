@@ -110,5 +110,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 for details.
 
 ---
-Authored by Youssef Fellah.
-Professional Development Orchestrator.
+
+## Author
+
+- **Author:** Youssef Fellah ([ind4x_](https://github.com/ind4x))
+- **Institution:** Mundiapolis University, Engineering Cycle

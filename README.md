@@ -114,4 +114,3 @@ for details.
 ## Author
 
 - **Author:** Youssef Fellah ([ind4x_](https://github.com/ind4x))
-- **Institution:** Mundiapolis University, Engineering Cycle

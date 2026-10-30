@@ -6,6 +6,7 @@ Django, Svelte, and Go.
 
 import typer
 
+from devctl.generators.agent import generate_agent_context
 from devctl.generators.angular import generate_angular_boilerplate
 from devctl.generators.django import generate_django_boilerplate
 from devctl.generators.fastapi import generate_fastapi_boilerplate
@@ -46,6 +47,7 @@ def init_spring(
 
     if success_download:
         generate_config(name, db_type=db, custom_port=port)
+        generate_agent_context()
         typer.secho("\nSpring project ready!", fg=typer.colors.GREEN)
 
 
@@ -61,6 +63,7 @@ def init_angular(name: str):
     success = generate_angular_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nAngular project ready!", fg=typer.colors.GREEN)
 
 
@@ -75,6 +78,7 @@ def init_vue(name: str):
     success = generate_vue_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nVue.js project ready!", fg=typer.colors.GREEN)
 
 
@@ -89,6 +93,7 @@ def init_nest(name: str):
     success = generate_nest_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nNestJS project ready!", fg=typer.colors.GREEN)
 
 
@@ -103,6 +108,7 @@ def init_nodejs(name: str):
     success = generate_nodejs_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nNodeJS project ready!", fg=typer.colors.GREEN)
 
 
@@ -117,6 +123,7 @@ def init_react(name: str):
     success = generate_react_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nReactJS project ready!", fg=typer.colors.GREEN)
 
 
@@ -131,6 +138,7 @@ def init_nextjs(name: str):
     success = generate_nextjs_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nNextJS project ready!", fg=typer.colors.GREEN)
 
 
@@ -145,6 +153,7 @@ def init_fastapi(name: str):
     success = generate_fastapi_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nFastAPI project ready!", fg=typer.colors.GREEN)
 
 
@@ -159,6 +168,7 @@ def init_django(name: str):
     success = generate_django_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nDjango project ready!", fg=typer.colors.GREEN)
 
 
@@ -173,6 +183,7 @@ def init_svelte(name: str):
     success = generate_svelte_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nSvelte project ready!", fg=typer.colors.GREEN)
 
 
@@ -187,4 +198,18 @@ def init_go(name: str):
     success = generate_go_boilerplate(name)
 
     if success:
+        generate_agent_context()
         typer.secho("\nGo project ready!", fg=typer.colors.GREEN)
+
+
+@app.command("agent")
+def init_agent():
+    """
+    Generates or refreshes AGENTS.md, CLAUDE.md, and .cursorrules for the current project.
+    """
+    success = generate_agent_context()
+    if success:
+        typer.secho("\nAgent context ready!", fg=typer.colors.GREEN)
+    else:
+        typer.secho("\nFailed to generate agent context.", fg=typer.colors.RED)
+        raise typer.Exit(code=1)

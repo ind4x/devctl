@@ -55,6 +55,7 @@ from devctl.commands.init import (
     generate_svelte_boilerplate,
     generate_vue_boilerplate,
 )
+from devctl.generators.agent import generate_agent_context
 from devctl.generators.docker import discover_docker_projects, scaffold_docker_assets
 from devctl.orchestrator.config_builder import generate_config
 from devctl.orchestrator.process_manager import ProcessManager
@@ -789,6 +790,7 @@ class DevctlTUI(App):
                     generate_go_boilerplate(name)
                 else:
                     print(f"Error: Unknown framework boilerplate '{framework}'")
+                generate_agent_context(".")
                 print("\nProject initialized successfully!")
         except Exception as e:
             print(f"Error during initialization: {e}", file=f)

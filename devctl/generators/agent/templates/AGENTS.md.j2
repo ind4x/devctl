@@ -1,0 +1,87 @@
+# Project Development Guide for AI Agents
+
+> This project is orchestrated using `devctl`. All commands, multi-tier processes,
+> and scaffolding workflows must adhere to the boundaries documented below.
+
+## 1. Project Architecture & Active Topology
+{% if backends %}
+### Backend Services
+{% for b in backends %}
+- **{{ b.name }}** ({{ b.framework }})
+  - Path: `{{ b.relative_path }}`
+  - Local Port: `{{ b.port }}`
+  - Run Command: `{{ b.run_cmd }}`
+  - Test Suite: `{{ b.test_cmd }}`
+{% endfor %}
+{% endif %}
+{% if frontends %}
+### Frontend Services
+{% for f in frontends %}
+- **{{ f.name }}** ({{ f.framework }})
+  - Path: `{{ f.relative_path }}`
+  - Local Dev Port: `{{ f.port }}`
+  - Run Command: `{{ f.run_cmd }}`
+  - Test Suite: `{{ f.test_cmd }}`
+{% endfor %}
+{% endif %}
+{% if databases %}
+### Databases & Infrastructure
+{% for db in databases %}
+- **Service**: `{{ db.service_name }}`
+  - Type: `{{ db.db_type }}`
+  - Image: `{{ db.image }}`
+  - Host Port: `{{ db.port }}`
+  - Database Name: `{{ db.db_name }}`
+  - Credentials: User=`{{ db.db_user }}`, Password=`{{ db.db_password }}`
+  - Compose File: `{{ db.compose_file }}`
+{% endfor %}
+{% endif %}
+{% if not backends and not frontends and not databases %}
+- Topology: No active microservices detected yet. Run `devctl init <framework> <name>` to add services.
+{% endif %}
+
+## 2. Devctl Orchestration & Lifecycle Commands
+
+Always use `devctl` to orchestrate services. Do NOT start background daemons, manually detached docker processes, or raw ad-hoc runners unless debugging an isolated failure.
+
+- **Start entire stack** (Databases + Backends + Frontends in parallel with unified log streaming):
+  ```bash
+  devctl run
+  ```
+- **Interactive TUI Dashboard** (System metrics, real-time log inspection, process management):
+  ```bash
+  devctl tui
+  ```
+- **Vertical Full-Stack Scaffolding** (Generates Entity, DTOs, Repository, Service, Controller, and Frontend client):
+  ```bash
+  devctl add resource <ResourceName> -f "<field1>:<type>,<field2>:<type>"
+  ```
+- **Containerization & Deployment Scaffolding**:
+  ```bash
+  devctl docker scaffold
+  devctl docker generate
+  ```
+
+## 3. Full-Stack Contract & Coding Conventions
+
+When adding or modifying API endpoints or data models:
+- **API Endpoints**: Use standard RESTful patterns with `/api/v1` prefixes.
+- **DTOs / Contracts**:
+  - Request payloads must be modeled with `<Entity>Request` DTOs.
+  - Response payloads must be modeled with `<Entity>Response` DTOs.
+- **Type Compatibility**:
+  - Backend numeric IDs / Long / Integer -> Frontend TypeScript `number`
+  - Backend UUID / String -> Frontend TypeScript `string`
+  - Backend Instant / LocalDateTime / DateTime -> Frontend TypeScript `string` (ISO 8601 formatted)
+  - Backend Boolean -> Frontend TypeScript `boolean`
+- **Synchronization**: Any change to backend DTO fields or endpoints MUST be immediately reflected in the corresponding frontend API client, models, and interfaces.
+
+## 4. Agent Operational Guardrails
+
+- **Process Management**: Do NOT run detached background processes (`nohup`, `&`, `screen`, `tmux`) that outlive the session. Use `devctl run` for execution.
+- **Testing Before Completion**: Always run the respective test suite for modified services before concluding any task:
+{% for s in services %}
+  - `{{ s.name }}`: `{{ s.test_cmd }}`
+{% endfor %}
+- **Docker Compose Boundaries**: Do NOT alter database port mappings in `docker-compose-db.yml` without updating application configuration files in lockstep.
+- **Dependency Checks**: Ensure required tools are available using `devctl` verification conventions before executing framework-specific build scripts.

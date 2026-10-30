@@ -21,6 +21,9 @@ containerization across Linux, macOS, and Windows.
 -   **Interactive Dashboard**: Real-time system monitoring (CPU/RAM/Disk) and service orchestration with side-by-side log streaming (`devctl tui`).
 -   **Security by Default**: Inject standardized JWT authentication and security
     configurations into new projects.
+-   **AI Agent Context Generation**: Automatically creates and updates `AGENTS.md`,
+    `CLAUDE.md`, and `.cursorrules` on project initialization, aligning coding agents
+    (Claude Code, Cursor, Copilot) with active ports, commands, and contract conventions.
 
 ## Interactive Dashboard (TUI)
 

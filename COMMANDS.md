@@ -25,6 +25,9 @@ Initialize a new project with a standard boilerplate and optimized configuration
 | **Django** | `devctl init django [name]` | Scaffolds a new Django REST Framework project. |
 | **Svelte** | `devctl init svelte [name]` | Scaffolds a new SvelteKit project. |
 | **Go** | `devctl init go [name]` | Scaffolds a new Go (Fiber) project. |
+| **Agent Context** | `devctl init agent` | Generates or refreshes `AGENTS.md`, `CLAUDE.md`, and `.cursorrules`. |
+
+> **Note**: Whenever any `devctl init <framework>` command finishes, `devctl` automatically scans the workspace and generates/refreshes the AI agent context files (`AGENTS.md`, `CLAUDE.md`, `.cursorrules`) with active services, port bindings, database credentials, and operational guardrails.
 
 ### Options
 *   `--db [postgres|mysql|mongodb]`: Specify the database driver for Spring Boot projects (Default: `postgres`).

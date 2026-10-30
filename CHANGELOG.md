@@ -4,6 +4,18 @@ This document tracks all notable changes to the `devctl` project. The format
 is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4] - October 30, 2026
+
+### Added
+
+- **AI Agent Context Generation:** Automated generation of `AGENTS.md`, `CLAUDE.md`, and `.cursorrules` on project initialization (`devctl init`) and via the interactive TUI.
+- **Dedicated Agent Command:** Added `devctl init agent` CLI command to generate or refresh agent context files in existing projects.
+- **Agent Test Suite:** Added unit tests in `test/test_agent_context.py` covering multi-service discovery, dynamic port resolution, and database configuration extraction.
+
+### Changed
+
+- **Packaging Assets:** Updated `pyproject.toml` package-data to include root generator templates and TUI stylesheets.
+
 ## [1.2.3] - August 29, 2026
 
 ### Fixed
